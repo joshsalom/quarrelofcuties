@@ -1,0 +1,46 @@
+{
+  "name": "quarrel-of-cuties",
+  "version": "1.0.0",
+  "description": "A simple webpage choice game with cute animals",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "webpack -wd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshsalom/quarrelofcuties.git"
+  },
+  "keywords": [
+    "quarrel",
+    "of",
+    "cuties",
+    "game"
+  ],
+  "author": "Joshua Salom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joshsalom/quarrelofcuties/issues"
+  },
+  "homepage": "https://github.com/joshsalom/quarrelofcuties#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "json-loader": "^0.5.4",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.11.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.11.0",
+    "webpack": "^3.0.0"
+  }
+}
