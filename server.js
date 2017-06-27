@@ -53,7 +53,7 @@ router.route('/animals')
 router.route('/animals/:animal_id')
 //get animal with id
   .get(function(req, res) {
-    Animal.findbyId(req.params.animal_id, function(err, animal) {
+    Animal.findById(req.params.animal_id, function(err, animal) {
       if (err)
         res.send(err);
       res.json(animal);
@@ -61,7 +61,7 @@ router.route('/animals/:animal_id')
   })
 //update animal func
   .put(function(req, res) {
-    Animal.findbyID(req.params.animal_id, function(err, animal) {
+    Animal.findById(req.params.animal_id, function(err, animal) {
       if (err)
         res.send(err);
       animal.species = req.body.species;
