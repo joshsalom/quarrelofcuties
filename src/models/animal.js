@@ -1,7 +1,7 @@
-var mongoose    = require('mongose');
+var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
-var BearSchema  = new Schema({
+var AnimalSchema  = new Schema({
   species: String,
   elo: Number
 });
