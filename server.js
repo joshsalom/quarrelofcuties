@@ -23,23 +23,64 @@ router.use(function(req, res, next) {
   next();
 });
 
+router.get('/', (req, res) => {
+  res.json({ message: 'Found API!'});
+});
+
 router.route('/animals')
-    .post(function(req, res) {
+//post func
+  .post(function(req, res) {
     var animal = new Animal();
     animal.species = req.body.species;
     animal.elo = req.body.elo;
     
     //save model
     animal.save(function(err) {
-        if (err)
-            res.send(err);
-        res.json({message: 'Animal created'});
+      if (err)
+        res.send(err);
+      res.json({message: 'Animal created'});
     });
-});
+  })
+//get all animals func
+  .get(function(req, res) {
+    Animal.find(function(err, animals) {
+      if (err)
+        res.send(err);
+      res.json(animals);
+    });
+  });
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Found API!'});
-});
+router.route('/animals/:animal_id')
+//get animal with id
+  .get(function(req, res) {
+    Animal.findbyId(req.params.animal_id, function(err, animal) {
+      if (err)
+        res.send(err);
+      res.json(animal);
+    });
+  })
+//update animal func
+  .put(function(req, res) {
+    Animal.findbyID(req.params.animal_id, function(err, animal) {
+      if (err)
+        res.send(err);
+      animal.species = req.body.species;
+      animal.elo = req.body.elo;
+      animal.save(function(err) {
+        if (err)
+          res.send(err);
+        res.json({message: 'Animal updated'});
+      });
+    });
+  })
+  .delete(function(req, res) {
+    Animal.remove({_id:req.params.animal_id}, function(err, animal) {
+      if (err)
+        res.send(err);
+      res.json({message: 'Animal deleted'});
+    });
+  });
+
 
 
 
