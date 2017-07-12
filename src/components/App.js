@@ -1,11 +1,13 @@
 import React from 'react';
+import Scrim from './Scrim';
 //import css
 
 class App extends React.Component {
   render() {
     return (
       <div>
-      Hello World!
+        The World!
+        <Scrim/>
       </div>
     );
   }

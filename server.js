@@ -68,7 +68,8 @@ router.route('/animals')
         author: 1,
         score: 1,
         url: 1,
-        elo: 1
+        elo: 1,
+        gamesPlayed: 1
       })
       .each((err, animal) => {
         assert.equal(null, err);
@@ -121,6 +122,7 @@ router.route('/animals/:animal_id')
         assert.equal(null, err);
         res.json(doc);
       });
+  //db.inventory.findOneAndUpdate( {item: 'postcard'}, {$set: {elo:1500}, $inc: {games: 1}, {upsert: true}})
   })
   /*
     Animal.findById(req.params.animal_id, function(err, animal) {
@@ -146,7 +148,30 @@ router.route('/animals/:animal_id')
     */
   });
 
-
+router.route('/scrim') //get two scrim partners
+  .get(function(req, res) {
+    let scrimList = {};
+    mdb.collection('reddit').find({})
+      .sort({games:1})
+      .limit(2)
+      .project({
+        _id: 1,
+        author: 1,
+        score: 1,
+        url: 1,
+        elo: 1,
+        gamesPlayed: 1
+      })
+      .each((err, animal) => {
+        assert.equal(null, err);
+    
+        if(!animal) { //no more animals
+          res.json({scrimList});
+          return;
+        }
+        scrimList[animal._id] = animal;
+      });
+  });
 
 /////////////////////////////////////////////////
 //api prefix
