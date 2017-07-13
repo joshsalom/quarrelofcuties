@@ -13,7 +13,7 @@ class Scrim extends React.Component {
   componentDidMount() {
     axios.get('/api/scrim')
       .then(res => {
-        const scrimmers = res.data.scrimList;
+        const scrimmers = res.data.scrimArray.map(function(animal) {return animal;});
         this.setState({
           scrimmers
         });
@@ -22,7 +22,20 @@ class Scrim extends React.Component {
   render() {
     return (
       <div>
-      Wow!
+        <h2>
+          Which is the Cutest?
+        </h2>
+        <div>
+          {this.state.scrimmers.map(animal => 
+            <div className='scrimProfile' key={animal._id}> 
+              <div>Picture by {animal.author}</div>
+              <img src={animal.url}></img>
+            </div>
+          )}
+        </div>
+        <div className='buttonWrapper'>
+          <button className='buttonLockIn'>Confirm that Cutie</button>  
+        </div>
       </div>
     );
   }

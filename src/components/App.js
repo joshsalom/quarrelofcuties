@@ -5,8 +5,7 @@ import Scrim from './Scrim';
 class App extends React.Component {
   render() {
     return (
-      <div>
-        The World!
+      <div className='container'>
         <Scrim/>
       </div>
     );

@@ -150,7 +150,7 @@ router.route('/animals/:animal_id')
 
 router.route('/scrim') //get two scrim partners
   .get(function(req, res) {
-    let scrimList = {};
+    //let scrimList = {};
     mdb.collection('reddit').find({})
       .sort({games:1})
       .limit(2)
@@ -162,6 +162,12 @@ router.route('/scrim') //get two scrim partners
         elo: 1,
         gamesPlayed: 1
       })
+      .toArray(function(err, scrimArray) {
+        assert.equal(null, err);
+        res.json({scrimArray});
+      });
+      
+    /*
       .each((err, animal) => {
         assert.equal(null, err);
     
@@ -171,6 +177,7 @@ router.route('/scrim') //get two scrim partners
         }
         scrimList[animal._id] = animal;
       });
+      */
   });
 
 /////////////////////////////////////////////////
