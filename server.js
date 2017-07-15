@@ -151,8 +151,20 @@ router.route('/animals/:animal_id')
 router.route('/scrim') //get two scrim partners
   .get(function(req, res) {
     //let scrimList = {};
+    mdb.collection('reddit').aggregate([
+      {$match:{}},
+      {$project: {_id:1, author:1, score:1, url:1, elo:1, gamesPlayed:1}},
+      {$sort:{gamesPlayed:1}},
+      {$limit:10},
+      {$sample:{size:2}}
+      ])
+      .toArray(function(err, scrimArray) {
+        assert.equal(null, err);
+        res.json({scrimArray});
+      });
+  /*
     mdb.collection('reddit').find({})
-      .sort({games:1})
+      .sort({gamesPlayed:1})
       .limit(2)
       .project({
         _id: 1,
@@ -166,7 +178,7 @@ router.route('/scrim') //get two scrim partners
         assert.equal(null, err);
         res.json({scrimArray});
       });
-      
+      */
     /*
       .each((err, animal) => {
         assert.equal(null, err);

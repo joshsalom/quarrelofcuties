@@ -39,6 +39,9 @@ p {
   padding: 10px 0;
   margin-left: 5px;
   margin-right: 5px;
+  border-color: aqua;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .scrimProfileI {
@@ -52,17 +55,32 @@ p {
   padding: 10px 0;
   margin-left: 5px;
   margin-right: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: lightgreen;
 }
 
 img {
-  width: 70%;
-  height: auto;
-  display: block;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  /*width: 70%;*/
+  /*height: auto;*/
+  max-width: 90%;
+  max-height: 90%;
+  vertical-align: middle;
+}
+.imgFrame {
+  height: 100%;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  margin: 0 auto;
+  display:inline-block;
+  position: relative;
+}
+span.imgHelper {
+  display: inline-block;
+  height 100%;
+  vertical-align: middle;
+  background-color: black;
 }
 
 button.buttonLockIn {
@@ -78,6 +96,11 @@ button.buttonLockIn {
   margin: 10px 2px;
   cursor: pointer;
   outline: none;
+}
+
+button:hover {
+  background-color: lightcoral;
+  
 }
 .buttonWrapper {
   text-align: center;

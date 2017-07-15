@@ -8,7 +8,8 @@ class Scrim extends React.Component {
     this.state = {
       scrimmers: [],
       buttonVisible: false,
-      selectedIndex: ""
+      selectedIndex: "blank",
+      currentScrimmers: []
     };
     
     //this.changeSelection = this.handleClick.bind(this);
@@ -19,8 +20,10 @@ class Scrim extends React.Component {
     axios.get('/api/scrim')
       .then(res => {
         const scrimmers = res.data.scrimArray.map(function(animal) {return animal;});
+        const currentScrimmers = res.data.scrimArray.map(function(animal) {return animal._id;});
         this.setState({
-          scrimmers
+          scrimmers,
+          currentScrimmers
         });
       });
   }
@@ -40,14 +43,16 @@ class Scrim extends React.Component {
     return (
       <div>
         <h2>
-          Which is the Cutest?
+          Which is cuter?
         </h2>
         <div>
           {this.state.scrimmers.map(animal => 
-            <div className='scrimProfileI'/*{selectedIndex===animal._id ? 'scrimProfileA':'scrimProfileI'}*/ key={animal._id} 
+            <div className={this.state.selectedIndex===animal._id ? 'scrimProfileA':'scrimProfileI'} key={animal._id} 
                            onClick={()=>this.changeSelection(animal._id)}> 
               <div>Picture by {animal.author}</div>
-              <img src={animal.url}></img>
+              <div className="imgFrame">
+                <span className="imgHelper"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></span><img src={animal.url}/> {/*next-line spam to help vertical alignment because I don't know how to fix it*/}
+              </div>
             </div>
           )}
         </div>
