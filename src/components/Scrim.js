@@ -6,8 +6,13 @@ class Scrim extends React.Component {
     super(props);
     
     this.state = {
-      scrimmers: []
+      scrimmers: [],
+      buttonVisible: false,
+      selectedIndex: ""
     };
+    
+    //this.changeSelection = this.handleClick.bind(this);
+    //this.alertMessage = this.alertMessage.bind(this);
   }
   
   componentDidMount() {
@@ -19,7 +24,19 @@ class Scrim extends React.Component {
         });
       });
   }
+  
+  changeSelection(animalIndex) {
+    this.setState({
+      buttonVisible: true,
+      selectedIndex: animalIndex
+      
+    });
+  }
+  alertMessage(string){
+    alert(string);
+  }
   render() {
+    const confirmButton = (this.state.buttonVisible? <button className='buttonLockIn' onClick={()=>this.alertMessage(this.state.selectedIndex)}>Confirm that Cutie</button> : null);
     return (
       <div>
         <h2>
@@ -27,14 +44,15 @@ class Scrim extends React.Component {
         </h2>
         <div>
           {this.state.scrimmers.map(animal => 
-            <div className='scrimProfile' key={animal._id}> 
+            <div className='scrimProfileI'/*{selectedIndex===animal._id ? 'scrimProfileA':'scrimProfileI'}*/ key={animal._id} 
+                           onClick={()=>this.changeSelection(animal._id)}> 
               <div>Picture by {animal.author}</div>
               <img src={animal.url}></img>
             </div>
           )}
         </div>
         <div className='buttonWrapper'>
-          <button className='buttonLockIn'>Confirm that Cutie</button>  
+          {confirmButton}
         </div>
       </div>
     );

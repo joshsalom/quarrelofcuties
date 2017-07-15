@@ -28,7 +28,20 @@ p {
   list-style-type: none;
 }
 
-.scrimProfile {
+.scrimProfileA {
+  text-align: center;
+  background-color: lightseagreen;
+  width: 48.5%;
+  float: left;
+  display: inline;
+  height: 450px;
+  border-radius: 25px;
+  padding: 10px 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.scrimProfileI {
   text-align: center;
   background-color: lightgreen;
   width: 48.5%;
