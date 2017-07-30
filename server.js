@@ -118,6 +118,21 @@ router.route('/scrim') //get two scrim partners
       });
   });
 
+router.route('/rankings') //get top 10 for leaderboard
+  .get(function(req, res) {
+    mdb.collection('reddit').aggregate([
+      {$match:{}},
+      {$project: {_id:1, author:1, score:1, url:1, elo:1, gamesPlayed:1, thumbnail:1}},
+      {$sort:{elo:-1}},
+      {$limit:10}
+    ])
+      .toArray(function(err, rankArray) {
+        assert.equal(null, err);
+        res.json({rankArray});
+      });
+  });
+
+
 /////////////////////////////////////////////////
 //api prefix
 app.use('/api', router);

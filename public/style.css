@@ -3,6 +3,8 @@ body {
   font: 100%/1.4 Helvetica, Arial, Verdana, sans-serif;
   background-image: url('qoc_bg.png');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
   color: #000;
@@ -34,7 +36,7 @@ p {
   width: 48.5%;
   float: left;
   display: inline;
-  height: 450px;
+  height: 400px;
   border-radius: 25px;
   padding: 10px 0;
   margin-left: 5px;
@@ -50,7 +52,7 @@ p {
   width: 48.5%;
   float: left;
   display: inline;
-  height: 450px;
+  height: 400px;
   border-radius: 25px;
   padding: 10px 0;
   margin-left: 5px;
@@ -104,4 +106,19 @@ button:hover {
 }
 .buttonWrapper {
   text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0 auto;
+}
+li {
+  width: 40%;
+  background-color: lightgreen;
+  border-radius: 25px;
+  padding: 10px 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  margin: 5px auto 5px;
 }

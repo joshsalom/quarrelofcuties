@@ -88,7 +88,7 @@ class Scrim extends React.Component {
               onClick={()=>this.changeSelection(animal._id)}> 
               <div>Picture by {animal.author}</div>
               <div className="imgFrame">
-                <span className="imgHelper"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></span><img src={animal.url}/> {/*next-line spam to help vertical alignment because I don't know how to fix it*/}
+                <span className="imgHelper"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></span><img src={animal.url}/> {/*next-line spam to help vertical alignment because I don't know how to fix it*/}
               </div>
             </div>
           )}

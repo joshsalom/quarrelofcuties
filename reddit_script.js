@@ -22,4 +22,8 @@ MongoClient.connect('mongodb://localhost:27017/quarrelofcuties', function(err, d
       });
     }
   });
+  db.collection('reddit').updateMany(
+    {},
+    {$set: {elo:1000, gamesPlayed: 0}},
+    {upsert: true});
 });
