@@ -17,7 +17,6 @@ body {
   max-height: 768px;
   min-width: 5px;
   min-height: 5px;
-  /*background-color: #FFF;*/
   margin: 0 auto;
 }
 
@@ -108,11 +107,30 @@ button:hover {
   text-align: center;
 }
 
-ul {
+ul.navbar {
   list-style-type: none;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: lightslategray;
 }
+
 li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color:lightskyblue;
+}
+
+li.leaderboardDesign {
   width: 40%;
   background-color: lightgreen;
   border-radius: 25px;
@@ -121,4 +139,11 @@ li {
   margin-bottom: 5px;
   text-align: center;
   margin: 5px auto 5px;
+  float: none;
+}
+
+.leaderboardUl {
+  list-style-type: none;
+  margin: 0 auto;
+  float: none;
 }

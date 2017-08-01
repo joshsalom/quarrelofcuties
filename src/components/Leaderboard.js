@@ -27,9 +27,9 @@ class Leaderboard extends React.Component {
   
   render() {
     return (
-      <ul>
+      <ul className="leaderboardUl">
         {this.state.rankArray.map(animal =>
-          <li key={animal._id}>
+          <li key={animal._id} className="leaderboardDesign"> 
             <img src={animal.thumbnail}/><br/>
             Redditor: {animal.author}<br/>
             Reddit Score: {animal.score}<br/>
