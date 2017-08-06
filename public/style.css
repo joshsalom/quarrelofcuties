@@ -61,6 +61,16 @@ p {
   border-color: lightgreen;
 }
 
+.scrimProfileA:hover {
+  backgorund-color: lightseagreen;
+  border-color: red;
+}
+
+.scrimProfileI:hover {
+  background-color: lightseagreen;
+  border-color: red;
+}
+
 img {
   /*width: 70%;*/
   /*height: auto;*/
@@ -112,7 +122,7 @@ ul.navbar {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: lightslategray;
+  background-color: dimgray;
 }
 
 li {

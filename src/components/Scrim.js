@@ -8,9 +8,9 @@ class Scrim extends React.Component {
     this.state = {
       scrimmers: [],
       buttonVisible: false,
-      selectedIndex: 'blank',
-      notSelectedIndex: 'blank',
-      currentScrimmers: []
+      selectedAnimalObj: {},
+      notSelectedAnimalObj: {}
+      //currentScrimmers: []
     };
   }
   
@@ -22,25 +22,25 @@ class Scrim extends React.Component {
     axios.get('/api/scrim')
       .then(res => {
         const scrimmers = res.data.scrimArray.map(function(animal) {return animal;});
-        const currentScrimmers = res.data.scrimArray.map(function(animal) {return animal._id;});
+        //const currentScrimmers = res.data.scrimArray.map(function(animal) {return animal._id;});  //might not be used
         this.setState({
-          scrimmers,
-          currentScrimmers
+          scrimmers
+          //currentScrimmers
         });
       });
   }
   
-  changeSelection(animalIndex) {
-    var notSelectedAnimalIndex = '';
-    for (var i=0; i < this.state.currentScrimmers.length; i++){
-      if (this.state.currentScrimmers[i] !== animalIndex){
-        notSelectedAnimalIndex = this.state.currentScrimmers[i];
+  changeSelection(animalObj) {
+    var thisNotSelectedAnimalObj = '';
+    for (var i=0; i < this.state.scrimmers.length; i++){
+      if (this.state.scrimmers[i]._id !== animalObj._id){
+        thisNotSelectedAnimalObj = this.state.scrimmers[i];
       }
     }
     this.setState({
       buttonVisible: true,
-      selectedIndex: animalIndex,
-      notSelectedIndex: notSelectedAnimalIndex
+      selectedAnimalObj: animalObj,
+      notSelectedAnimalObj: thisNotSelectedAnimalObj
     });
   }
   alertMessage(string){ //()=>this.alertMessage(this.state.selectedIndex)
@@ -49,14 +49,25 @@ class Scrim extends React.Component {
   
   confirmSelection(winner, loser) {
     //TODO: calculate ELO
-    axios.put('/api/animals/' + winner, {
-      elo: 1000
+    var kFactor = 32;
+    
+    var winnerR = Math.pow(10, (winner.elo/400));
+    var loserR = Math.pow(10, (loser.elo/400));
+    
+    var winnerE = winnerR/(winnerR + loserR);
+    var loserE = loserR/(winnerR + loserR);
+    
+    var winnerNewElo = winner.elo + kFactor*(1-winnerE);
+    var loserNewElo = loser.elo + kFactor*(0-loserE);
+    
+    axios.put('/api/animals/' + winner._id, {
+      elo: winnerNewElo
     })
       .then(function(response) {
         return response.data;
       });
-    axios.put('/api/animals/' + loser, {
-      elo: 1000
+    axios.put('/api/animals/' + loser._id, {
+      elo: loserNewElo
     })
       .then(function(response) {
         return response.data;
@@ -64,8 +75,8 @@ class Scrim extends React.Component {
     this.getScrimPartners();
     this.setState({
       buttonVisible: false,
-      selectedIndex: 'blank',
-      notSelectedIndex: 'blank'
+      selectedAnimalObj: {},
+      notSelectedAnimalObj: {}
     });
   }
   
@@ -73,7 +84,7 @@ class Scrim extends React.Component {
     const confirmButton = 
       (this.state.buttonVisible? 
         <button className='buttonLockIn' 
-          onClick={()=>this.confirmSelection(this.state.selectedIndex, this.state.notSelectedIndex)}>
+          onClick={()=>this.confirmSelection(this.state.selectedAnimalObj, this.state.notSelectedAnimalObj)}>
         Confirm that Cutie
         </button> 
         : null);
@@ -84,8 +95,8 @@ class Scrim extends React.Component {
         </h2>
         <div>
           {this.state.scrimmers.map(animal => 
-            <div className={this.state.selectedIndex===animal._id ? 'scrimProfileA':'scrimProfileI'} key={animal._id} 
-              onClick={()=>this.changeSelection(animal._id)}> 
+            <div className={this.state.selectedAnimalObj._id===animal._id ? 'scrimProfileA':'scrimProfileI'} key={animal._id} 
+              onClick={()=>this.changeSelection(animal)}> 
               <div>Picture by {animal.author}</div>
               <div className="imgFrame">
                 <span className="imgHelper"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></span><img src={animal.url}/> {/*next-line spam to help vertical alignment because I don't know how to fix it*/}
